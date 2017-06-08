@@ -1,6 +1,6 @@
 var contactListController;
 
-contactListController = function($scope, $http) {
+contactListController = function($scope, contactService) {
 	$scope.contacts = [];
 	$scope.preDeletedContact = {};
 
@@ -9,8 +9,15 @@ contactListController = function($scope, $http) {
 	};
 	
 	$scope.listAllContacts = function() {
-
-		// Chamar o servlet /contacts com um método 'GET' para listar os contatos do banco de dados.
+        contactService.listContacts().then(
+            function success(res){
+                $scope.contacts = res.data;
+            },
+            function error(err) {
+                console.error("falha ao obter lista de contatos: " + err.data);
+                alert(err.data);
+            }
+        )
 	};
 
 	$scope.preDelete = function(contact) {
