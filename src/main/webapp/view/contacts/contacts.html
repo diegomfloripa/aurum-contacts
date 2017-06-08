@@ -9,7 +9,11 @@
       </div>
     </div>
 
-    <div class="table-responsive">
+
+  <div class="table-responsive">
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="search" placeholder="Pesquisar" ng-model="query">
+    </div>
 
       <table class="table table-hover">
       
@@ -24,12 +28,12 @@
         
         <tbody>
 
-          <tr ng-repeat="c in contacts">
+          <tr ng-repeat="c in contacts | filter: query">
             <td>{{c.name}}</td>
             <td>{{c.emails[0]}}</td>
             <td>{{c.phones[0]}}</td>
             <td>{{bday(c)}}</td>
-            <td> <i class="fa fa-pencil-square-o" ng-click="openEdit(c)"></i><td>
+            <td> <i class="fa fa-pencil-square-o icon-box" ng-click="openEdit(c)"></i><td>
             <td> <i class="fa fa-trash-o icon-box" ng-click="preDelete(c)"></i> <td>
           </tr>
 
