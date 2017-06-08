@@ -1,6 +1,6 @@
 var contactListController;
 
-contactListController = function($scope, $http) {
+contactListController = function($scope, contactService, $state) {
 	$scope.contacts = [];
 	$scope.preDeletedContact = {};
 
@@ -9,8 +9,15 @@ contactListController = function($scope, $http) {
 	};
 	
 	$scope.listAllContacts = function() {
-
-		// Chamar o servlet /contacts com um método 'GET' para listar os contatos do banco de dados.
+        contactService.listContacts().then(
+            function success(res){
+                $scope.contacts = res.data;
+            },
+            function error(err) {
+                console.error("falha ao obter lista de contatos: " + err.data);
+                alert(err.data);
+            }
+        )
 	};
 
 	$scope.preDelete = function(contact) {
@@ -20,10 +27,23 @@ contactListController = function($scope, $http) {
 
 	$scope.delete = function() {
 		if($scope.preDeletedContact != null) {
-
-			// Chamar o servlet /contacts com um método 'DELETE' para deletar um contato do banco de dados passando um parâmetro de identificação.
+            contactService.deleteContact($scope.preDeletedContact.id).then(
+                function success(res){
+                     $('#myModal').modal('toggle');
+                     $scope.init();
+                },
+                function error(err) {
+                    console.error("falha ao deletar contato: " + err.data);
+                    alert(err.data);
+                }
+            )
 		}
 	};
+
+	$scope.openEdit = function(contact) {
+    	var params = {'contactId': contact.id};
+	    $state.go('main.addeditcontact', params);
+	}
 
 	$scope.bday = function(c) {
 		if(c.birthDay==null || c.birthDay == ""){
