@@ -19,16 +19,20 @@
       
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Nascimento</th>
+            <th ng-click="sort='name'; reverse = !reverse">Nome
+              <i ng-show="sort=='name'" ng-class="{'fa fa-angle-down': reverse, 'fa fa-angle-up': !reverse}"aria-hidden="true"></i></th>
+            <th ng-click="sort='emails'; reverse = !reverse">Email
+              <i ng-show="sort=='emails'" ng-class="{'fa fa-angle-down': reverse, 'fa fa-angle-up': !reverse}"aria-hidden="true"></i></th>
+            <th ng-click="sort='phones'; reverse = !reverse">Telefone
+              <i ng-show="sort=='phones'" ng-class="{'fa fa-angle-down': reverse, 'fa fa-angle-up': !reverse}"aria-hidden="true"></i></th>
+            <th ng-click="sort='bday'; reverse = !reverse">Nascimento
+              <i ng-show="sort=='bday'" ng-class="{'fa fa-angle-down': reverse, 'fa fa-angle-up': !reverse}"aria-hidden="true"></i></th>
           </tr>
         </thead>
         
         <tbody>
 
-          <tr ng-repeat="c in contacts | filter: query">
+          <tr ng-repeat="c in contacts | filter: query | orderBy: sort : reverse">
             <td>{{c.name}}</td>
             <td>{{c.emails[0]}}</td>
             <td>{{c.phones[0]}}</td>
