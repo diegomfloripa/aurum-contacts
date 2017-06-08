@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.ObjectifyService;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import br.com.aurum.astrea.domain.Contact;
 
@@ -14,7 +15,7 @@ public class ContactDao {
 	}
 	
 	public void save(Contact contact) {
-		// TODO: É preciso pesquisar como se usa o Objectify para armazenar a entidade contato no banco de dados.
+		ofy().save().entity(contact).now();
 	}
 	
 	public List<Contact> list() {
