@@ -4,7 +4,8 @@ contactService = function($http) {
     var service = {
         createContact: createContact,
         listContacts: listContacts,
-        deleteContact: deleteContact
+        deleteContact: deleteContact,
+        getContactById: getContactById
     };
 
     function createContact(contact) {
@@ -20,6 +21,11 @@ contactService = function($http) {
     function deleteContact(contactId) {
          var url = '/contacts?id=' + contactId;
          return $http.delete(url);
+    }
+
+    function getContactById(contactId) {
+         var url = '/contacts?id=' + contactId;
+         return $http.get(url);
     }
 
 

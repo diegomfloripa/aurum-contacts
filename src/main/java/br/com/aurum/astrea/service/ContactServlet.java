@@ -36,12 +36,22 @@ public class ContactServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		List<Contact> contacts = new ContactController(dao).list();
-		resp.getWriter().write(new Gson().toJson(contacts));
+		String paramId = req.getParameter("id");
+		if(hasId(paramId)) {
+			Contact contact = new ContactController(dao).getById(Long.parseLong(paramId));
+			resp.getWriter().write(new Gson().toJson(contact));
+		} else {
+			List<Contact> contacts = new ContactController(dao).list();
+			resp.getWriter().write(new Gson().toJson(contacts));
+		}
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
 	}
-	
+
+	private boolean hasId(String paramId) {
+		return paramId != null && !paramId.isEmpty();
+	}
+
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Long id = Long.parseLong(req.getParameter("id"));
