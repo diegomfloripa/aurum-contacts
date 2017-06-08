@@ -24,7 +24,7 @@ public class ContactController {
             throw new ValidationException("contact is null");
         }
         if(contact.getName() == null || contact.getName().isEmpty()) {
-            throw new ValidationException("name is empty");
+            throw new ValidationException("Nome é necessário");
         }
     }
 }
