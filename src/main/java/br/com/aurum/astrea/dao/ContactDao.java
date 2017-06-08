@@ -19,8 +19,7 @@ public class ContactDao {
 	}
 	
 	public List<Contact> list() {
-		// TODO: É preciso pesquisar como se usa o Objectify para listar as entidades de contato.
-		return new ArrayList<>();
+		return ofy().load().type(Contact.class).list();
 	}
 	
 	public void delete(Long contactId) {

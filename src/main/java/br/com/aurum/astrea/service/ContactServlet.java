@@ -1,6 +1,7 @@
 package br.com.aurum.astrea.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,10 @@ public class ContactServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		// TODO: Implementar um método que irá listar todas as entidades do tipo 'Contato' e devolver para o client essa listagem.
+		List<Contact> contacts = new ContactController(dao).list();
+		resp.getWriter().write(new Gson().toJson(contacts));
+		resp.setContentType("application/json");
+		resp.setCharacterEncoding("UTF-8");
 	}
 	
 	@Override
