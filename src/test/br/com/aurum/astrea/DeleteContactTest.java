@@ -3,7 +3,6 @@ package br.com.aurum.astrea;
 import br.com.aurum.astrea.controller.ContactController;
 import br.com.aurum.astrea.dao.ContactDao;
 import br.com.aurum.astrea.domain.Contact;
-import br.com.aurum.astrea.exception.ValidationException;
 import org.junit.Before;
 import org.junit.Test;
 

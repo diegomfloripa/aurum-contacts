@@ -1,20 +1,18 @@
 package br.com.aurum.astrea.service;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import br.com.aurum.astrea.controller.ContactController;
 import br.com.aurum.astrea.dao.ContactDao;
 import br.com.aurum.astrea.domain.Contact;
 import br.com.aurum.astrea.exception.ValidationException;
-import com.google.appengine.repackaged.com.google.api.client.http.HttpStatusCodes;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class ContactServlet extends HttpServlet {

@@ -1,12 +1,11 @@
 package br.com.aurum.astrea.dao;
 
-import java.util.ArrayList;
+import br.com.aurum.astrea.domain.Contact;
+import com.googlecode.objectify.ObjectifyService;
+
 import java.util.List;
 
-import com.googlecode.objectify.ObjectifyService;
 import static com.googlecode.objectify.ObjectifyService.ofy;
-
-import br.com.aurum.astrea.domain.Contact;
 
 public class ContactDao {
 	
