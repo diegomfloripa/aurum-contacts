@@ -27,8 +27,16 @@ contactListController = function($scope, contactService) {
 
 	$scope.delete = function() {
 		if($scope.preDeletedContact != null) {
-
-			// Chamar o servlet /contacts com um método 'DELETE' para deletar um contato do banco de dados passando um parâmetro de identificação.
+            contactService.deleteContact($scope.preDeletedContact.id).then(
+                function success(res){
+                     $('#myModal').modal('toggle');
+                     $scope.init();
+                },
+                function error(err) {
+                    console.error("falha ao deletar contato: " + err.data);
+                    alert(err.data);
+                }
+            )
 		}
 	};
 

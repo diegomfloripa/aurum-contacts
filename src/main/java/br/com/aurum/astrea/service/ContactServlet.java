@@ -44,6 +44,7 @@ public class ContactServlet extends HttpServlet {
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		// TODO: Implementar um método que irá deletar uma entidade do tipo 'Contato', dado parâmetro de identificação.
+		Long id = Long.parseLong(req.getParameter("id"));
+		new ContactController(dao).delete(id);
 	}
 }

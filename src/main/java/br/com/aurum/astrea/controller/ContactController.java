@@ -33,4 +33,11 @@ public class ContactController {
     public List<Contact> list() {
         return dao.list();
     }
+
+    public void delete(Long contactId) {
+        Contact contact = dao.getById(contactId);
+        if (contact != null) {
+            dao.delete(contact);
+        }
+    }
 }

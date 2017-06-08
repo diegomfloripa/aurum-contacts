@@ -17,12 +17,20 @@ public class ContactDao {
 	public void save(Contact contact) {
 		ofy().save().entity(contact).now();
 	}
+
+	public Contact getById(Long contactId) {
+		return ofy()
+				.load()
+				.type(Contact.class)
+				.id(contactId)
+				.now();
+	}
 	
 	public List<Contact> list() {
 		return ofy().load().type(Contact.class).list();
 	}
 	
-	public void delete(Long contactId) {
-		// TODO: É preciso pesquisar como se usa o Objectify para deletar entidades do banco de dados.
+	public void delete(Contact contact) {
+		ofy().delete().entity(contact).now();
 	}
 }
