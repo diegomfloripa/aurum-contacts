@@ -18,7 +18,7 @@ contactAddEditController = function($scope, contactService, $state) {
                     alert(err.data);
                 }
 		    )
-//		}
+		}
 	};
 
 	$scope.addMorePhones = function() {
