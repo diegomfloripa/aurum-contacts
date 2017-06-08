@@ -5,7 +5,19 @@ contactAddEditController = function($scope, contactService, $state) {
 	$scope.contact.emails = [''];
 	$scope.contact.phones = [''];
 	$scope.submitted = false;
-	
+
+	if($state.params.contactId != null && $state.params.contactId != '') {
+	    contactService.getContactById($state.params.contactId).then(
+            function success(res){
+                $scope.contact = res.data;
+            },
+            function error(err) {
+                console.error("falha ao carregar contato: " + err.data);
+                alert(err.data);
+            }
+        )
+	}
+
 	$scope.save = function() {
 		$scope.submitted = true;
 		if ($scope.contact.name != null && $scope.contact.name != "") {

@@ -1,6 +1,6 @@
 var contactListController;
 
-contactListController = function($scope, contactService) {
+contactListController = function($scope, contactService, $state) {
 	$scope.contacts = [];
 	$scope.preDeletedContact = {};
 
@@ -39,6 +39,11 @@ contactListController = function($scope, contactService) {
             )
 		}
 	};
+
+	$scope.openEdit = function(contact) {
+    	var params = {'contactId': contact.id};
+	    $state.go('main.addeditcontact', params);
+	}
 
 	$scope.bday = function(c) {
 		if(c.birthDay==null || c.birthDay == ""){

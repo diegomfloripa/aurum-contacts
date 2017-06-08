@@ -34,10 +34,15 @@ public class ContactController {
         return dao.list();
     }
 
+    public Contact getById(Long contactId) {
+        return dao.getById(contactId);
+    }
+
     public void delete(Long contactId) {
-        Contact contact = dao.getById(contactId);
+        Contact contact = getById(contactId);
         if (contact != null) {
             dao.delete(contact);
         }
     }
+
 }
