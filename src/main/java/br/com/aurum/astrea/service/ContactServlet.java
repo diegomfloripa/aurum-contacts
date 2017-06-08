@@ -6,19 +6,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.aurum.astrea.controller.ContactController;
 import br.com.aurum.astrea.dao.ContactDao;
 import br.com.aurum.astrea.domain.Contact;
+import br.com.aurum.astrea.exception.ValidationException;
 import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public class ContactServlet extends HttpServlet {
-
-	private static final ContactDao DAO = new ContactDao();
+	private ContactDao dao = new ContactDao();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Contact contact = new Gson().fromJson(req.getReader(), Contact.class);
-		DAO.save(contact);
+		try {
+			new ContactController(dao).save(contact);
+		} catch (ValidationException e) {
+			//TODO tratar essa excessão
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
