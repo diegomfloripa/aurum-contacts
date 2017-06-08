@@ -1,6 +1,6 @@
 var contactAddEditController;
 
-contactAddEditController = function($scope, contactService) {
+contactAddEditController = function($scope, contactService, $state) {
 	$scope.contact = {};
 	$scope.contact.emails = [''];
 	$scope.contact.phones = [''];
@@ -11,13 +11,14 @@ contactAddEditController = function($scope, contactService) {
 		if ($scope.contact.name != null && $scope.contact.name != "") {
 		    contactService.createContact($scope.contact).then(
                 function success(res){
-                    console.log("sucesso: " + res);
+                    $state.go('main.contacts')
                 },
                 function error(err) {
-                    console.err("fail: " + res);
+                    console.error("falha ao cadastrar um contato: " + err.data);
+                    alert(err.data);
                 }
 		    )
-		}
+//		}
 	};
 
 	$scope.addMorePhones = function() {

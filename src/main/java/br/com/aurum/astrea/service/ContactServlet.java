@@ -10,10 +10,14 @@ import br.com.aurum.astrea.controller.ContactController;
 import br.com.aurum.astrea.dao.ContactDao;
 import br.com.aurum.astrea.domain.Contact;
 import br.com.aurum.astrea.exception.ValidationException;
+import com.google.appengine.repackaged.com.google.api.client.http.HttpStatusCodes;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public class ContactServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(ContactServlet.class);
 	private ContactDao dao = new ContactDao();
 
 	@Override
@@ -22,8 +26,10 @@ public class ContactServlet extends HttpServlet {
 		try {
 			new ContactController(dao).save(contact);
 		} catch (ValidationException e) {
-			//TODO tratar essa excessão
-			e.printStackTrace();
+			logger.debug("Falha ao adicioanar um contato.", e);
+			resp.setStatus(400);
+			resp.setCharacterEncoding("UTF-8");
+			resp.getWriter().write(e.getMessage());
 		}
 	}
 	
